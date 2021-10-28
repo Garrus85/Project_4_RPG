@@ -1,0 +1,3 @@
+
+
+def story(hero):

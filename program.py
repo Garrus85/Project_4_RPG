@@ -1,10 +1,22 @@
 import characters
+import game
+import soldier
+import rogue
+import adept
 
 def main():
-    hero = characters.Hero("Bjorn", "Warrior")
+    name, role = game.intro()
+    hero = characters.Hero(name, role)
     print(hero.get_details())
-    print(hero.get_attributes())
-    print(hero.get_inventory())
+
+    if role == "S":
+        soldier.story(hero)
+    elif role == "R":
+        rogue.story(hero)
+    else:
+        adept.story(hero)
+
+   # print(hero.get_inventory())
 
 
 

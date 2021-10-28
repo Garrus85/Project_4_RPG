@@ -1,0 +1,4 @@
+
+
+def story(hero):
+    pass
