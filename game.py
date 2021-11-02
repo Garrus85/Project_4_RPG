@@ -55,4 +55,14 @@ def intro():
 
 
 
-
+def combat(hero, enemy):
+    """NEED TO GET HERO AND ENEMY HP AND MAKE WHILE STATEMENT"""
+    hero_hp = hero.
+    print("You attack the daamon!")
+    attack_roll = hero.attack_roll()
+    print(f'You rolled {attack_roll}')
+    defense_roll = enemy.defense_roll()
+    if attack_roll > defense_roll:
+        print("Your attack slices into the daamon's left arm")
+    else:
+        print("Your attack narrowly misses the daamon's throat")

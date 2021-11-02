@@ -4,10 +4,11 @@ import soldier
 import rogue
 import adept
 
+
 def main():
     name, role = game.intro()
     hero = characters.Hero(name, role)
-    print(hero.get_details())
+    #print(hero.get_details())
 
     if role == "S":
         soldier.story(hero)
