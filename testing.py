@@ -36,45 +36,47 @@ class Hero:
             attributes_string = attributes_string + f"{key}: {self.attributes[key]}. "
         return attributes_string
 
-
-    def return_hp(self):
-        return self.attributes["HP"]
-
-
     def get_inventory(self):
-        return "".join(f'{key}: {self.inventory[key]}.' for key in self.inventory)
+        return "".join(f'{key}: {self.inventory[key]}  ' for key in self.inventory)
 
     def collect_loot(self, loot):
-        """TODO: update inventory with new loot if key not already in dictionary"""
         for key in loot:
             if key in self.inventory:
                 self.inventory[key] = self.inventory[key] + loot[key]
 
-
     def equipped_weapon(self):
         return self.weapon[0][0]
 
-
     def attack_roll(self):
-        #TODO: edit rolls for STR, DEX, WIS, LUCK
-        return self.attributes.get("STR") + random.randint(1,20)
-
+        # TODO: edit rolls for STR, DEX, WIS, LUCK
+        return self.attributes.get("STR") + random.randint(1, 20)
 
     def defense_roll(self):
-        #TODO: add LUCK multiplier
+        # TODO: add LUCK multiplier
         return self.attributes.get("AC")
 
-
     def damage_roll(self):
-        #TODO: add critical hit scenario
+        # TODO: add critical hit scenario
         return self.weapon[0][1] + self.attributes.get("STR") + random.randint(1, 6)
 
+    def return_hp(self):
+        return self.attributes["HP"]
 
     def damage_taken(self, dmg):
         self.attributes["HP"] = self.attributes["HP"] - dmg
         return f'Your HP is now {self.attributes["HP"]}'
 
 
+# --------TESTS-------
+hero = Hero("Bjorn", "S")
+#print(hero.return_hp())
+# print(hero.get_details())        # TEST PASS
+# print(hero.attributes            # TEST PASS
+# print(hero.attack_roll())        # TEST PASS
+# print(hero.damage_taken(22))     # TEST PASS
+# print(hero.damage_roll())        # TEST PASS
+# print(hero.get_inventory())      # TEST PASS
+# print(hero.equipped_weapon())    # TEST PASS
 
 
 class NPC:
@@ -86,10 +88,7 @@ class NPC:
 
     @property
     def get_inventory(self):
-        return " ".join(f'{key}: {self.inventory[key]} ' for key in self.inventory if self.inventory[key] > 0)
-
-    def return_hp(self):
-        return self.attributes["HP"]
+        return self.inventory
 
     def attack_roll(self):
         return self.attributes.get("STR") + random.randint(1, 20)
@@ -105,7 +104,6 @@ class NPC:
         return f'The {self.type}s HP is {self.attributes["HP"]}'
 
 
-
 class Daamon(NPC):
     def __init__(self, type):
         self.type = type
@@ -114,3 +112,21 @@ class Daamon(NPC):
         self.attributes["STR"] = self.attributes["STR"] + random.randint(1, 2)
         self.inventory["Copper"] = self.inventory["Copper"] + random.randint(1, 20)
         self.weapon.append(["Barbed Club", 4])
+
+
+# ----TESTS-----
+daamon = Daamon("Daamon")
+#print(daamon.get_inventory)  # TEST PASS
+# print(daamon.attack_roll())        #TEST PASS
+# print(daamon.defense_roll())       #TEST PASS
+# print(daamon.damage_roll())        #TEST PASS
+# print(daamon.damage_taken(20))     #TEST PASS
+
+#   LOOT MECHANICS
+#loot = daamon.get_inventory
+#print(loot)                         #TEST PASS
+#inv = hero.get_inventory()
+#print(inv)                          #TEST PASS
+#hero.collect_loot(loot)
+#inv2 = hero.get_inventory()
+#print(inv2)                         #TEST PASS

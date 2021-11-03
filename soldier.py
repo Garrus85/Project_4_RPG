@@ -26,7 +26,16 @@ def story(hero):
             print("Invalid choice.")
             continue
 
+
 def soldierA1(hero):
-    daamon = characters.Daamon()
+    daamon = characters.Daamon("Daamon")
     game.combat(hero, daamon)
+
+
+def soldierA2():
+    pass
+
+
+def soldierA3():
+    pass
 
