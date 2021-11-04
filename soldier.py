@@ -10,12 +10,15 @@ def story(hero):
     print("""
     The battle rages all around you. You see comrades fall on either side of you. A screaming daamon hurls itself
     at you. What do you do?
+    """)
+    time.sleep(2)
+    print("""
     [A] Attack 
     [F] Fall back to the nearest squad
     [D] Drop your weapon and shit your pants
     """)
     while True:
-        choice = input("")
+        choice = input("").upper()
         if choice == "A":
             soldierA1(hero)
         elif choice == "F":

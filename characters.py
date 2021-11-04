@@ -40,9 +40,10 @@ class Hero:
     def return_hp(self):
         return self.attributes["HP"]
 
-
+    @property
     def get_inventory(self):
         return "".join(f'{key}: {self.inventory[key]}.' for key in self.inventory)
+
 
     def collect_loot(self, loot):
         """TODO: update inventory with new loot if key not already in dictionary"""
@@ -61,13 +62,19 @@ class Hero:
 
 
     def defense_roll(self):
-        #TODO: add LUCK multiplier
-        return self.attributes.get("AC")
+        luck_roll = random.randint(self.attributes.get("LUCK"), 20)
+        if luck_roll != 20:
+            return self.attributes.get("AC")
+        print("You dodged the attack!")
+        return self.attributes.get("AC") + 20
 
 
-    def damage_roll(self):
-        #TODO: add critical hit scenario
-        return self.weapon[0][1] + self.attributes.get("STR") + random.randint(1, 6)
+    def damage_roll(self, roll=0):
+        dmg = self.weapon[0][1] + self.attributes.get("STR") + random.randint(1, 6)
+        if roll - self.attributes.get("STR") != 20:
+            return dmg
+        print("CRITICAL HIT!")
+        return dmg * 2
 
 
     def damage_taken(self, dmg):
@@ -97,8 +104,12 @@ class NPC:
     def defense_roll(self):
         return self.attributes.get("AC")
 
-    def damage_roll(self):
-        return self.weapon[0][1] + self.attributes.get("STR") + random.randint(1, 6)
+    def damage_roll(self, roll):
+        dmg = self.weapon[0][1] + self.attributes.get("STR") + random.randint(1, 6)
+        if roll - self.attributes.get("STR") == 20:
+            return dmg * 2
+        else:
+            return dmg
 
     def damage_taken(self, dmg):
         self.attributes["HP"] = self.attributes["HP"] - dmg

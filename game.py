@@ -67,7 +67,7 @@ def combat(hero, enemy):
 
     while hero_hp > 0 or enemy_hp > 0:
 
-        print("You attack the daamon!")
+        print("\nYou attack the daamon!")
         hero_attack_roll = hero.attack_roll()
         time.sleep(1)
         print(f'You rolled {hero_attack_roll}')
@@ -75,23 +75,31 @@ def combat(hero, enemy):
         time.sleep(1)
         if hero_attack_roll > enemy_defense_roll:
             print("Your attack hits!")
-            dmg = hero.damage_roll()
-            enemy.damage_taken(dmg)
+            time.sleep(1)
+            dmg = hero.damage_roll(hero_attack_roll)
+            print(f'You deal {dmg} points of damage.')
+            print(enemy.damage_taken(dmg))
+            enemy_hp -= dmg
         else:
             print("Your attack missed.")
-        time.sleep(1)
+        time.sleep(2)
 
-        print("The enemy attacks!")
+        if enemy_hp <= 0:
+            break
+
+        print("\nThe enemy attacks!")
+        time.sleep(1)
         enemy_attack_roll = enemy.attack_roll()
         print(f'The enemy rolled {enemy_attack_roll}')
+        time.sleep(1)
         hero_defense_roll = hero.defense_roll()
         if enemy_attack_roll > hero_defense_roll:
             print("You have been hit!")
-            enemy_dmg = enemy.damage_roll()
+            enemy_dmg = enemy.damage_roll(enemy_attack_roll)
             hero.damage_taken(enemy_dmg)
         else:
             print("The attack missed")
-
+        time.sleep(1)
     if hero_hp == 0:
         print("You have died")
         time.sleep(2)
