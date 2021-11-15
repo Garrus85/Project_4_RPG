@@ -1,5 +1,6 @@
 import random
-
+import characters
+import game
 
 class Hero:
 
@@ -68,14 +69,17 @@ class Hero:
 
 
 # --------TESTS-------
-hero = Hero("Bjorn", "S")
+hero = characters.Hero("Bjorn", "S")
 #print(hero.return_hp())
+#hero.update_hp(300)               # TEST PASS
+#print(hero.return_hp())
+#game.menu(hero)                   # TEST PASS
 # print(hero.get_details())        # TEST PASS
 # print(hero.attributes            # TEST PASS
 # print(hero.attack_roll())        # TEST PASS
 # print(hero.damage_taken(22))     # TEST PASS
 # print(hero.damage_roll())        # TEST PASS
-# print(hero.get_inventory())      # TEST PASS
+#print(hero.get_inventory())      # TEST PASS
 # print(hero.equipped_weapon())    # TEST PASS
 
 

@@ -3,6 +3,8 @@ import random
 
 class Hero:
 
+    """Class which contains all the mechanics for the hero"""
+
     def __init__(self, name, role):
         self.name = name
         self.inventory = {"Gold": 0, "Silver": 5, "Copper": 30}
@@ -31,18 +33,23 @@ class Hero:
             self.weapon.append(("Staff", 3))
 
     def get_details(self):
-        attributes_string = f'{self.name} the {self.role}: Level {self.level}.\n'
+        hero_attributes = f'{self.name} the {self.role}: Level {self.level}.\n'
         for key in self.attributes:
-            attributes_string = attributes_string + f"{key}: {self.attributes[key]}. "
-        return attributes_string
+            hero_attributes = hero_attributes + f'{key}: {self.attributes[key]}. '
+        return hero_attributes
 
 
     def return_hp(self):
         return self.attributes["HP"]
 
-    @property
+    def update_hp(self, health):
+        #TODO: update HP not working
+        self.attributes["HP"] = health
+
+
+    #@property  - CAUSES STR NOT CALLABLE ERROR
     def get_inventory(self):
-        return "".join(f'{key}: {self.inventory[key]}.' for key in self.inventory)
+        return "".join(f'{key}: {self.inventory[key]}. ' for key in self.inventory)
 
 
     def collect_loot(self, loot):
@@ -58,14 +65,14 @@ class Hero:
 
     def attack_roll(self):
         #TODO: edit rolls for STR, DEX, WIS, LUCK
-        return self.attributes.get("STR") + random.randint(1,20)
+        return self.attributes.get("STR") + random.randint(1, 20)
 
 
     def defense_roll(self):
         luck_roll = random.randint(self.attributes.get("LUCK"), 20)
         if luck_roll != 20:
             return self.attributes.get("AC")
-        print("You dodged the attack!")
+        print("------ DODGE ------")
         return self.attributes.get("AC") + 20
 
 
@@ -73,7 +80,7 @@ class Hero:
         dmg = self.weapon[0][1] + self.attributes.get("STR") + random.randint(1, 6)
         if roll - self.attributes.get("STR") != 20:
             return dmg
-        print("CRITICAL HIT!")
+        print("------ CRITICAL HIT! ------")
         return dmg * 2
 
 
@@ -85,6 +92,12 @@ class Hero:
 
 
 class NPC:
+
+    """
+    This is the generic NPC starting parent class. Will be used to define enemy NPCs
+    Contains mechanics for enemy encounters
+                                                                                """
+
     def __init__(self, type):
         self.name = type
         self.attributes = {"HP": 75, "AC": 10, "STR": 1, "DEX": 1, "WIS": 1, "LUCK": 1}
@@ -118,6 +131,9 @@ class NPC:
 
 
 class Daamon(NPC):
+
+    """The first enemy class - uses NPC class as its parent"""
+
     def __init__(self, type):
         self.type = type
         super().__init__(self)

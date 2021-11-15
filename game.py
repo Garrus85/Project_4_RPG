@@ -1,6 +1,7 @@
 import time
 
 
+
 def intro():
 
     print(" ---------------------------- ")
@@ -55,13 +56,15 @@ def intro():
 
 
 def game_over():
+    print("You have died")
+    time.sleep(2)
     print(" ---------------------------- ")
     print(" -------- GAME OVER --------- ")
     print(" ---------------------------- ")
 
 
 def combat(hero, enemy):
-
+    #TODO: Offer options after round of combat: attack, run, use item etc
     hero_hp = hero.return_hp()
     enemy_hp = enemy.return_hp()
 
@@ -97,18 +100,63 @@ def combat(hero, enemy):
             print("You have been hit!")
             enemy_dmg = enemy.damage_roll(enemy_attack_roll)
             hero.damage_taken(enemy_dmg)
+            print(f'You take {enemy_dmg} points of damage.')
         else:
             print("The attack missed")
         time.sleep(1)
+
     if hero_hp == 0:
-        print("You have died")
-        time.sleep(2)
         game_over()
     else:
         print(f'Your HP is {hero_hp}')
+        hero.update_hp(hero_hp)
         loot = enemy.get_inventory
         print(f'The enemy dropped {loot}')
-
         return hero
 
+
+def menu(hero):
+    print("""
+    [C] CONTINUE
+    [I] INVENTORY
+    [S] SAVE GAME
+    """)
+    time.sleep(1)
+    choice = input().upper()
+    if choice == "C":
+        return
+    elif choice == "I":
+        print(hero.get_details())
+        time.sleep(1)
+       #print(f'Your HP is: {hero.return_hp()}')
+        print(hero.get_inventory())
+        time.sleep(1)
+        return
+    elif choice == "S":
+        #TODO: IMPLEMENT SAVE FUNCTION
+        menu(hero)
+    else:
+        print("Invalid choice")
+
+
+def combat_choice(hero):
+    # TODO: TO BE ADDED TO BEGINNING OF COMBAT
+    print("""Action required! \n
+    [A] ATTACK
+    [T] TALK
+    [I] USE ITEM
+    [F] FLEE
+    """)
+    choice = input().upper()
+
+    if choice == "F":
+        pass
+    elif choice == "T":
+        pass
+    elif choice == "I":
+        pass
+    elif choice == "I":
+        pass
+    else:
+        print("Invalid choice")
 
