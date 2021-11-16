@@ -1,6 +1,7 @@
 import random
 import characters
 import game
+import soldier
 
 class Hero:
 
@@ -70,6 +71,7 @@ class Hero:
 
 # --------TESTS-------
 hero = characters.Hero("Bjorn", "S")
+soldier.soldierB1(hero, "a3")
 #print(hero.return_hp())
 #hero.update_hp(300)               # TEST PASS
 #print(hero.return_hp())

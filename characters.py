@@ -141,3 +141,34 @@ class Daamon(NPC):
         self.attributes["STR"] = self.attributes["STR"] + random.randint(1, 2)
         self.inventory["Copper"] = self.inventory["Copper"] + random.randint(1, 20)
         self.weapon.append(["Barbed Club", 4])
+
+
+class Military_Human(NPC):
+
+    """The basis for human Military NPCs - uses NPC class as its parent"""
+
+    def __init__(self, type):
+        self.type = type
+        super().__init__(self)
+        self.attributes["STR"] = self.attributes["STR"] + random.randint(1, 2)
+        self.attributes["WIS"] = self.attributes["WIS"] + random.randint(1, 2)
+        self.inventory["Copper"] = self.inventory["Copper"] + random.randint(7, 28)
+        self.weapon.append(["Fists", 1])
+
+    def speech_on_dmg(self):
+        x = random.randint(1, 3)
+        if x == 1:
+            print("Aaargh, I think you broke my nose!")
+        elif x == 2:
+            print("Ugh! That was a lucky shot")
+        else:
+            print("I won't let you beat me")
+
+    def speech_on_attack(self):
+        y = random.randint(1, 3)
+        if y == 1:
+            print("Ha! Get up from that one")
+        elif y == 2:
+            print("I think I just rearranged your face")
+        else:
+            print("If you don't back down now, you'll loose even more teeth!")

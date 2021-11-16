@@ -22,9 +22,9 @@ def story(hero):
         if choice == "A":
             soldierA1(hero)
         elif choice == "F":
-            soldierA2()
+            soldierA2(hero)
         elif choice == "D":
-            soldierA3()
+            soldierA3(hero)
         else:
             print("Invalid choice.")
             continue
@@ -40,19 +40,19 @@ def soldierA1(hero):
     building behind you, forcing you forward to continue the assualt...    
     """)
     time.sleep(2)
-    soldierB1()
+    soldierB1(hero, "a1")
 
 
-def soldierA2():
+def soldierA2(hero):
     print("""
     You fall back to the nearest squad. Together you engage the daamon and overwhelm it. The momentum of
     battle continues to push you forward 
     """)
     time.sleep(2)
-    soldierB1()
+    soldierB1(hero, "a2")
 
 
-def soldierA3():
+def soldierA3(hero):
     print("""
     You are overcome with fear. You loose all feeling in your fingers and drop you weapon. You close your 
     eyes.The daamon raises its weapon to deliver a killing blow...
@@ -68,10 +68,28 @@ def soldierA3():
     to sob into your hands...
     """)
     time.sleep(2)
+    soldierB1(hero, "a3")
 
 
-def soldierB1():
+def soldierB1(hero, choice):
+
+
+def soldierB2(hero):
     print("""
-        It takes the better part of the night for the enemy to finally turn and flee. Tonight there will be
-        time for some sombre celebrations...
-        """)
+    You cannot contain the simmering rage which has just gripped your heart. You get up and 
+    walk quickly towards the sergeant. 'Hoi Sir, you forgot something!'
+    """)
+    time.sleep(2)
+    sergeant = characters.Military_Human("Sergeant")
+    game.combat(hero, "Sergeant")
+    game.menu(hero)
+    #TODO: test this fight
+
+def soldierB3(ero):
+    pass
+
+def soldierB4(hero):
+    pass
+
+
+
