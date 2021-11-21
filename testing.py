@@ -3,75 +3,17 @@ import characters
 import game
 import soldier
 
-class Hero:
-
-    def __init__(self, name, role):
-        self.name = name
-        self.inventory = {"Gold": 0, "Silver": 5, "Copper": 30}
-        self.level = 1
-        self.attributes = {"HP": 100, "AC": 10, "STR": 1, "DEX": 1, "WIS": 1, "LUCK": 1}
-        self.weapon = []
-
-        if role == "S":
-            self.role = "Soldier"
-            self.attributes["HP"] = self.attributes["HP"] + random.randint(20, 50)
-            self.attributes["STR"] = self.attributes["STR"] + random.randint(1, 4)
-            self.attributes["AC"] = self.attributes["AC"] + 3
-            self.weapon.append(("Sword", 5))
-        elif role == "R":
-            self.role = "Rogue"
-            self.attributes["HP"] = self.attributes["HP"] + random.randint(10, 35)
-            self.attributes["DEX"] = self.attributes["DEX"] + random.randint(1, 4)
-            self.attributes["AC"] = self.attributes["AC"] + 1
-            self.attributes["LUCK"] = self.attributes["LUCK"] + random.randint(1, 3)
-            self.weapon.append(("Short Sword", 3))
-        else:
-            self.role = "Adept"
-            self.attributes["HP"] = self.attributes["HP"] + random.randint(0, 20)
-            self.attributes["WIS"] = self.attributes["WIS"] + random.randint(1, 6)
-            self.attributes["LUCK"] = self.attributes["LUCK"] + random.randint(1, 2)
-            self.weapon.append(("Staff", 3))
-
-    def get_details(self):
-        attributes_string = f'{self.name} the {self.role}: Level {self.level}.\n'
-        for key in self.attributes:
-            attributes_string = attributes_string + f"{key}: {self.attributes[key]}. "
-        return attributes_string
-
-    def get_inventory(self):
-        return "".join(f'{key}: {self.inventory[key]}  ' for key in self.inventory)
-
-    def collect_loot(self, loot):
-        for key in loot:
-            if key in self.inventory:
-                self.inventory[key] = self.inventory[key] + loot[key]
-
-    def equipped_weapon(self):
-        return self.weapon[0][0]
-
-    def attack_roll(self):
-        # TODO: edit rolls for STR, DEX, WIS, LUCK
-        return self.attributes.get("STR") + random.randint(1, 20)
-
-    def defense_roll(self):
-        # TODO: add LUCK multiplier
-        return self.attributes.get("AC")
-
-    def damage_roll(self):
-        # TODO: add critical hit scenario
-        return self.weapon[0][1] + self.attributes.get("STR") + random.randint(1, 6)
-
-    def return_hp(self):
-        return self.attributes["HP"]
-
-    def damage_taken(self, dmg):
-        self.attributes["HP"] = self.attributes["HP"] - dmg
-        return f'Your HP is now {self.attributes["HP"]}'
-
 
 # --------TESTS-------
 hero = characters.Hero("Bjorn", "S")
-soldier.soldierB1(hero, "a3")
+#soldier.soldierB2(hero)
+
+
+sergeant = characters.Military_Human("Sergeant")
+#sergeant.speech_on_dmg()
+#print(sergeant.type)
+
+#soldier.soldierB1(hero, "a3"      # TEST PASS
 #print(hero.return_hp())
 #hero.update_hp(300)               # TEST PASS
 #print(hero.return_hp())
@@ -83,44 +25,8 @@ soldier.soldierB1(hero, "a3")
 # print(hero.damage_roll())        # TEST PASS
 #print(hero.get_inventory())      # TEST PASS
 # print(hero.equipped_weapon())    # TEST PASS
+#
 
-
-class NPC:
-    def __init__(self, type):
-        self.name = type
-        self.attributes = {"HP": 75, "AC": 10, "STR": 1, "DEX": 1, "WIS": 1, "LUCK": 1}
-        self.inventory = {"Gold": 0, "Silver": 0, "Copper": 0}
-        self.weapon = []
-
-    @property
-    def get_inventory(self):
-        return self.inventory
-
-    def attack_roll(self):
-        return self.attributes.get("STR") + random.randint(1, 20)
-
-    def defense_roll(self):
-        return self.attributes.get("AC")
-
-    def damage_roll(self):
-        return self.weapon[0][1] + self.attributes.get("STR") + random.randint(1, 6)
-
-    def damage_taken(self, dmg):
-        self.attributes["HP"] = self.attributes["HP"] - dmg
-        return f'The {self.type}s HP is {self.attributes["HP"]}'
-
-
-class Daamon(NPC):
-    def __init__(self, type):
-        self.type = type
-        super().__init__(self)
-        self.attributes["HP"] = self.attributes["HP"] + random.randint(15, 25)
-        self.attributes["STR"] = self.attributes["STR"] + random.randint(1, 2)
-        self.inventory["Copper"] = self.inventory["Copper"] + random.randint(1, 20)
-        self.weapon.append(["Barbed Club", 4])
-
-
-# ----TESTS-----
 daamon = Daamon("Daamon")
 #print(daamon.get_inventory)  # TEST PASS
 # print(daamon.attack_roll())        #TEST PASS
@@ -136,3 +42,103 @@ daamon = Daamon("Daamon")
 #hero.collect_loot(loot)
 #inv2 = hero.get_inventory()
 #print(inv2)                         #TEST PASS
+
+
+
+import characters
+import time
+import game
+
+
+def story(hero):
+    print(hero.get_details())
+    time.sleep(1)
+
+    print("""
+    The battle rages all around you. You see comrades fall with limbs hanging loose. A screaming 
+    daamon hurls itself at you. What do you do?
+    """)
+    time.sleep(2)
+    print("""
+    [A] Attack 
+    [F] Fall back to the nearest squad
+    [D] Drop your weapon and shit your pants
+    """)
+    while True:
+        choice = input("").upper()
+        if choice == "A":
+            soldierA1(hero)
+        elif choice == "F":
+            soldierA2(hero)
+        elif choice == "D":
+            soldierA3(hero)
+        else:
+            print("Invalid choice.")
+            continue
+
+
+def soldierA1(hero):
+    daamon = characters.Daamon("Daamon")
+    game.combat(hero, daamon)
+    game.menu(hero)
+    print("""
+    You fell the beast before you. The stench of death fills your nostrils and the screams of the dying
+    invade your ears. The tide of the battle appears to be turning. You can almost feel the pressure
+    building behind you, forcing you forward to continue the assualt...    
+    """)
+    time.sleep(2)
+    soldierB1(hero, "a1")
+
+
+def soldierA2(hero):
+    print("""
+    You fall back to the nearest squad. Together you engage the daamon and overwhelm it. The momentum of
+    battle continues to push you forward 
+    """)
+    time.sleep(2)
+    soldierB1(hero, "a2")
+
+
+def soldierA3(hero):
+    print("""
+    You are overcome with fear. You loose all feeling in your fingers and drop you weapon. You close your 
+    eyes.The daamon raises its weapon to deliver a killing blow...
+    """)
+    time.sleep(2)
+    print("""You open your eyes to see a majestic, armoured Being gallop past on what can only be described
+    as a giant horse. The Being gracefully severs the daamon's head with one swing and proceeds to charge
+    into the next group of enemies. 
+    """)
+    time.sleep(1)
+    print("""
+    You stare in disbelief - your head is still attached to your body! You fall to you knees and begin
+    to sob into your hands...
+    """)
+    time.sleep(2)
+    soldierB1(hero, "a3")
+
+
+def soldierB1(hero, choice):
+
+
+def soldierB2(hero):
+    print("""
+    You cannot contain the simmering rage which has just gripped your heart. You get up and 
+    stride towards the sergeant. 'Hoi Sir, you forgot something!'
+    """)
+    time.sleep(2)
+    sergeant = characters.Military_Human("Sergeant")
+    game.combat(hero, sergeant)
+    game.menu(hero)
+    pass
+    #TODO: test this fight
+
+
+def soldierB3(ero):
+    pass
+
+def soldierB4(hero):
+    pass
+
+
+

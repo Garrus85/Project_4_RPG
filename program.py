@@ -17,7 +17,7 @@ def main():
     else:
         adept.story(hero)
 
-   # print(hero.get_inventory())
+
 
 
 

@@ -70,7 +70,7 @@ def combat(hero, enemy):
 
     while hero_hp > 0 or enemy_hp > 0:
 
-        print("\nYou attack the daamon!")
+        print(f'\nYou attack the {enemy.type}!')
         hero_attack_roll = hero.attack_roll()
         time.sleep(1)
         print(f'You rolled {hero_attack_roll}')
@@ -78,6 +78,7 @@ def combat(hero, enemy):
         time.sleep(1)
         if hero_attack_roll > enemy_defense_roll:
             print("Your attack hits!")
+            enemy.speech_on_dmg()
             time.sleep(1)
             dmg = hero.damage_roll(hero_attack_roll)
             print(f'You deal {dmg} points of damage.')
