@@ -8,16 +8,16 @@ def story(hero):
     time.sleep(1)
 
     print("""
-    The battle rages all around you. You see comrades fall with limbs hanging loose. A screaming 
-    daamon hurls itself at you. What do you do?
+    The battle rages all around you. You see comrades fall with limbs hanging loose. You have somehow
+    strayed away from your squad. A screaming daamon hurls itself at you. 
     """)
     time.sleep(2)
-    print("""
+    while True:
+        print("""
     [A] Attack 
     [F] Fall back to the nearest squad
     [D] Drop your weapon and shit your pants
-    """)
-    while True:
+        """)
         choice = input("").upper()
         if choice == "A":
             soldier_a1(hero)
@@ -40,15 +40,17 @@ def soldier_a1(hero):
     building behind you, forcing you forward to continue the assualt...    
     """)
     time.sleep(2)
+    game.pause()
     soldier_b1(hero, "a1")
 
 
 def soldier_a2(hero):
     print("""
     You fall back to the nearest squad. Together you engage the daamon and overwhelm it. The momentum of
-    battle continues to push you forward 
+    battle continues to push you forward. You stay in this new squad for the next assualt...
     """)
     time.sleep(2)
+    game.pause()
     soldier_b1(hero, "a2")
 
 
@@ -58,17 +60,20 @@ def soldier_a3(hero):
     eyes.The daamon raises its weapon to deliver a killing blow...
     """)
     time.sleep(2)
+    game.pause()
     print("""
     You open your eyes to see a majestic, armoured Being gallop past on what can only be described
     as a giant horse. The Being gracefully severs the daamon's head with one swing and proceeds to charge
     into the next group of enemies. 
     """)
     time.sleep(1)
+    game.pause()
     print("""
     You stare in disbelief - your head is still attached to your body! You fall to you knees and begin
     to sob into your hands...
     """)
     time.sleep(2)
+    game.pause()
     soldier_b1(hero, "a3")
 
 
@@ -79,33 +84,37 @@ def soldier_b1(hero, choice):
     crunching of boots on gravel announces your sergeants arrival.
     """)
     time.sleep(2)
-    #TODO: recreate the sergeants conversation
+    game.pause()
     if choice == "a1":
         print("""
-        'I heard you stood your ground and took down one of those bastards by yourself. If only all of 
-        our men had your stubborn stupidity, hah.'
-        You grunt in response. The sergeant just stares at you, probably expecting some sort of heroic 
-        response.
-        """)
+    'I heard you stood your ground and took down one of those bastards by yourself. If only all of 
+    our men had your stubborn stupidity, hah.'
+    You grunt in response. The sergeant just stares at you, probably expecting some sort of heroic 
+    one-liner.
+    """)
     elif choice == "a2":
         print("""
-        Saw you managed to keep yer wits about you in the heat of battle. Better to fall back, strength in
-        numbers an' all that! Rather that then get yer skull smashed in!'
-        The sergeant looks around at the surrounding camp fires.
-        """)
+    Saw you managed to keep yer wits about you in the heat of battle. Better to fall back, strength in
+    numbers an' all that! Rather that then get yer skull smashed in!'
+    The sergeant looks around at the surrounding camp fires.
+    """)
     else:
-        pass
-    time.sleep(2)
-    print("""
-        'Anyways, Cap'n send me to tell you that yer brother is on the run. He's a filthy Twilight Adept
-        and was sentenced to execution before he slipped his chains and disappeared. Thought you'd want to
-        know.'
-        He continues to stare at you, with a slight smirk on his face. You sit there, unable to fully
-        comprehend what he just said.
-        'I'll be keeping an eye on you. Evil breeds evil so the first sign of you showing any affinity to
-        power and I'll 'av your head! Hah'
-        The sergeant spins on his heels and begins walking back the way he had come. 
+        print("""
+    'Next time, do yer squad a favour and fall on yer own sword at the next battle and rid us of yer
+    cowardice.'   
         """)
+    time.sleep(2)
+    game.pause()
+    print("""
+    'Anyways, Cap'n send me to tell you that yer brother is on the run. He's a filthy Twilight Adept
+    and was sentenced to execution before he slipped his chains and disappeared. Thought you'd want to
+    know.' \n
+    He continues to stare at you, with a slight smirk on his face. You sit there, unable to fully
+    comprehend what he just said. \n
+    'I'll be keeping an eye on you. Evil breeds evil so the first sign of you showing any affinity to
+    power and I'll 'av your head! Hah'
+    The sergeant spins on his heels and begins walking back the way he had come. 
+    """)
     time.sleep(2)
     while True:
         print("""
@@ -134,6 +143,7 @@ def soldier_b3(hero):
     'Hoi Sir, you forgot something!'
     """)
     time.sleep(2)
+    game.pause()
     sergeant = characters.Military_Human("Sergeant")
     game.combat(hero, sergeant)
     game.menu(hero)

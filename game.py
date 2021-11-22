@@ -149,7 +149,6 @@ def combat_choice(hero):
     [F] FLEE
     """)
     choice = input().upper()
-
     if choice == "F":
         pass
     elif choice == "T":
@@ -161,3 +160,8 @@ def combat_choice(hero):
     else:
         print("Invalid choice")
 
+
+def pause():
+    print("-->")
+    pause = input()
+    return pause
